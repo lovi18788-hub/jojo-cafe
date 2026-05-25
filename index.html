@@ -17,8 +17,9 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#111;
+background:#0d0d0d;
 color:white;
+overflow-x:hidden;
 }
 
 /* NAVBAR */
@@ -28,16 +29,20 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 padding:20px 8%;
-background:black;
-position:sticky;
+background:rgba(0,0,0,0.85);
+backdrop-filter:blur(10px);
+position:fixed;
+width:100%;
 top:0;
 z-index:1000;
+border-bottom:1px solid #222;
 }
 
 .logo{
-font-size:32px;
+font-size:34px;
 font-weight:bold;
 color:#ffb703;
+letter-spacing:2px;
 }
 
 nav ul{
@@ -65,8 +70,8 @@ color:#ffb703;
 .hero{
 height:100vh;
 background:
-linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-url('https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1400') center/cover;
+linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),
+url('https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1600') center/cover;
 
 display:flex;
 justify-content:center;
@@ -76,96 +81,146 @@ padding:20px;
 }
 
 .hero-content h1{
-font-size:70px;
-margin-bottom:20px;
+font-size:85px;
 color:#ffb703;
+margin-bottom:20px;
+text-shadow:0 0 20px rgba(255,183,3,0.4);
 }
 
 .hero-content p{
 font-size:24px;
-max-width:700px;
+max-width:750px;
+line-height:1.7;
 margin:auto;
-margin-bottom:30px;
+margin-bottom:35px;
+color:#ddd;
 }
 
 .btn{
 display:inline-block;
+padding:16px 40px;
 background:#ffb703;
 color:black;
-padding:15px 35px;
+text-decoration:none;
 font-size:20px;
 font-weight:bold;
-text-decoration:none;
-border-radius:5px;
+border-radius:8px;
 transition:0.3s;
+box-shadow:0 0 20px rgba(255,183,3,0.4);
 }
 
 .btn:hover{
+transform:scale(1.05);
 background:white;
 }
 
 /* SECTION */
 
 .section{
-padding:80px 10%;
+padding:100px 10%;
 text-align:center;
 }
 
 .section h2{
-font-size:45px;
-margin-bottom:40px;
+font-size:50px;
+margin-bottom:50px;
 color:#ffb703;
 }
 
-/* CARDS */
+/* SLIDER */
 
-.cards{
+.slider{
 display:flex;
-justify-content:center;
-flex-wrap:wrap;
+overflow-x:auto;
 gap:25px;
+padding-bottom:20px;
+scroll-snap-type:x mandatory;
 }
 
-.card{
-background:#1e1e1e;
-padding:30px;
-width:280px;
-border-radius:15px;
+.slider::-webkit-scrollbar{
+height:8px;
+}
+
+.slider::-webkit-scrollbar-thumb{
+background:#ffb703;
+border-radius:10px;
+}
+
+.slide{
+min-width:320px;
+background:#171717;
+border-radius:20px;
+overflow:hidden;
+scroll-snap-align:center;
 transition:0.3s;
+box-shadow:0 0 25px rgba(0,0,0,0.5);
 }
 
-.card:hover{
+.slide:hover{
 transform:translateY(-10px);
 }
 
-.card h3{
+.slide img{
+width:100%;
+height:250px;
+object-fit:cover;
+}
+
+.slide-content{
+padding:25px;
+}
+
+.slide-content h3{
+font-size:30px;
 margin-bottom:15px;
-font-size:28px;
+color:#ffb703;
+}
+
+.slide-content p{
+color:#ccc;
+line-height:1.6;
+}
+
+/* ABOUT */
+
+.about-text{
+font-size:22px;
+line-height:1.9;
+max-width:950px;
+margin:auto;
+color:#ddd;
 }
 
 /* REVIEWS */
 
 .review{
-background:#1d1d1d;
-padding:25px;
-border-radius:12px;
-margin-bottom:20px;
+background:#171717;
+padding:30px;
+margin-bottom:25px;
+border-radius:15px;
 text-align:left;
+border-left:5px solid #ffb703;
+}
+
+.review h3{
+margin-bottom:12px;
 }
 
 /* CONTACT */
 
 .contact p{
 font-size:22px;
-margin:15px 0;
+margin:18px 0;
+color:#ddd;
 }
 
 /* FOOTER */
 
 footer{
-background:black;
-padding:25px;
+padding:30px;
 text-align:center;
+background:black;
+border-top:1px solid #222;
 }
 
 /* MOBILE */
@@ -173,7 +228,7 @@ text-align:center;
 @media(max-width:768px){
 
 .hero-content h1{
-font-size:45px;
+font-size:50px;
 }
 
 .hero-content p{
@@ -190,6 +245,10 @@ margin-top:15px;
 
 nav ul li{
 margin:0 10px;
+}
+
+.section h2{
+font-size:38px;
 }
 
 }
@@ -209,8 +268,8 @@ margin:0 10px;
 
 <ul>
 <li><a href="#home">Home</a></li>
-<li><a href="#about">About</a></li>
 <li><a href="#menu">Menu</a></li>
+<li><a href="#about">About</a></li>
 <li><a href="#reviews">Reviews</a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
@@ -226,11 +285,75 @@ margin:0 10px;
 <h1>Cafe Jojo</h1>
 
 <p>
-Premium cafe & restaurant in Sahnewal, Punjab.
-Taste delicious meals, pizza, coffee and enjoy a cozy atmosphere.
+Luxury cafe experience in Sahnewal, Punjab.
+Premium burgers, pizza, coffee and aesthetic vibes with unforgettable taste.
 </p>
 
 <a href="#menu" class="btn">Explore Menu</a>
+
+</div>
+
+</section>
+
+<!-- MENU -->
+
+<section class="section" id="menu">
+
+<h2>Signature Menu</h2>
+
+<div class="slider">
+
+<div class="slide">
+
+<img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1200">
+
+<div class="slide-content">
+<h3>Premium Burger</h3>
+<p>
+Juicy grilled burger with crispy fries and premium sauces.
+</p>
+</div>
+
+</div>
+
+<div class="slide">
+
+<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200">
+
+<div class="slide-content">
+<h3>Paneer Pizza</h3>
+<p>
+Soft cheesy paneer pizza with delicious toppings.
+</p>
+</div>
+
+</div>
+
+<div class="slide">
+
+<img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1200">
+
+<div class="slide-content">
+<h3>Premium Coffee</h3>
+<p>
+Fresh aromatic coffee served with luxury presentation.
+</p>
+</div>
+
+</div>
+
+<div class="slide">
+
+<img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1200">
+
+<div class="slide-content">
+<h3>Special Pasta</h3>
+<p>
+Creamy pasta loaded with premium ingredients and flavor.
+</p>
+</div>
+
+</div>
 
 </div>
 
@@ -240,45 +363,14 @@ Taste delicious meals, pizza, coffee and enjoy a cozy atmosphere.
 
 <section class="section" id="about">
 
-<h2>About Us</h2>
+<h2>About Cafe Jojo</h2>
 
-<p style="font-size:22px; max-width:900px; margin:auto; line-height:1.8;">
-Cafe Jojo is a modern restaurant located on Grand Trunk Road, Sahnewal, Punjab.
-Known for tasty meals, soft paneer pizza, quality food and cozy ambiance.
-We provide dine-in, drive-through and no-contact delivery services.
+<p class="about-text">
+
+Cafe Jojo is one of Sahnewal’s favorite modern cafes known for quality meals, aesthetic interiors and premium ambiance.
+From soft paneer pizza to luxury burgers and coffee, we deliver unforgettable taste with comfort and style.
+
 </p>
-
-</section>
-
-<!-- MENU -->
-
-<section class="section" id="menu">
-
-<h2>Popular Items</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>🍕 Paneer Pizza</h3>
-<p>Soft cheesy pizza with fresh paneer toppings.</p>
-</div>
-
-<div class="card">
-<h3>☕ Premium Coffee</h3>
-<p>Freshly brewed coffee with rich flavor.</p>
-</div>
-
-<div class="card">
-<h3>🍔 Burger Combo</h3>
-<p>Delicious burgers served with crispy fries.</p>
-</div>
-
-<div class="card">
-<h3>🥤 Cold Drinks</h3>
-<p>Refreshing drinks and mocktails available.</p>
-</div>
-
-</div>
 
 </section>
 
@@ -291,23 +383,21 @@ We provide dine-in, drive-through and no-contact delivery services.
 <div class="review">
 <h3>⭐⭐⭐⭐⭐ Harman Singh</h3>
 <p>
-“Precise place for quality and tasty meals.
-Decoration, interior and overall ambiance is awesome.”
+“Precise place for quality and tasty meals. Decoration and ambiance is awesome.”
 </p>
 </div>
 
 <div class="review">
 <h3>⭐⭐⭐⭐⭐ Jaswinder Singh</h3>
 <p>
-“The Paneer pizza is too much tasty and soft.
-Definitely coming back again.”
+“The Paneer pizza is super soft and tasty. Definitely visiting again.”
 </p>
 </div>
 
 <div class="review">
 <h3>⭐⭐⭐⭐ Karan Sandhu</h3>
 <p>
-“Good taste and quantity but seating space is less.”
+“Good taste and quantity. Nice premium vibe.”
 </p>
 </div>
 
@@ -327,7 +417,7 @@ Definitely coming back again.”
 
 <p>💰 ₹200–400 per person</p>
 
-<a href="#" class="btn">Order Now</a>
+<a href="#" class="btn">Reserve Table</a>
 
 </section>
 
@@ -336,7 +426,7 @@ Definitely coming back again.”
 <footer>
 
 <p>
-© 2026 Cafe Jojo | Sahnewal Punjab
+© 2026 Cafe Jojo | Premium Restaurant Experience
 </p>
 
 </footer>
